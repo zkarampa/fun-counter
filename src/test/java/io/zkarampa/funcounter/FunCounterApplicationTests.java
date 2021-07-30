@@ -1,13 +1,13 @@
-package io.zkarampa.funtracker;
+package io.zkarampa.funcounter;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FunTrackerApplicationTests {
+class FunCounterApplicationTests {
 
-    @Test
-    void contextLoads() {
-    }
+	@Test
+	void contextLoads() {
+	}
 
 }
