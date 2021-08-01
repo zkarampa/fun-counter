@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Boot Session Management Redis Example</title>
+</head>
+<body>
+<!--<div>-->
+    <!--<form th:action="@{/create}" method="post">-->
+        <!--<textarea name="info" cols="40" rows="2"></textarea>-->
+        <!--<br> <input type="submit" value="Create Game" />-->
+    <!--</form>-->
+<!--</div>-->
+<!--<div>-->
+    <!--<form th:action="@{/invalidate/session}" method="post">-->
+        <!--<input type="submit" value="Destroy Session" />-->
+    <!--</form>-->
+<!--</div>-->
+
+
+<!--&lt;!&ndash; IF CUSTOMER IS ANONYMOUS &ndash;&gt;-->
+<!--<div th:if="${player.anonymous}">-->
+    <!--<div>Welcome, Guest</div>-->
+<!--</div>-->
+<!--&lt;!&ndash; ELSE &ndash;&gt;-->
+<!--<div th:unless="${player.anonymous}">-->
+    <!--<div th:text=" 'Hi,' + ${player.name}">Hi, User</div>-->
+<!--</div>-->
+
+
+
+<div>
+    <span th:text="${info}" />
+</div>
+
+</body>
+</html>
