@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 
 @Service
@@ -14,8 +15,9 @@ public class GameService {
 
 
     public String createGame(Game input){
+        int id = new Random().nextInt(999999);
+        String key = String.format("%06d", id);
 
-        String key = UUID.randomUUID().toString();
 
         games.put(key, input);
 
