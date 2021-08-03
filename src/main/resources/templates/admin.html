@@ -35,6 +35,8 @@
 <div>
     <h2>Game URL</h2>
     <span th:text="${gameId}" />
+<span th:text="${#request.requestURI}/${gameId}" />
+
 </div>
 
 </body>
