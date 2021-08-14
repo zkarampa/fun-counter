@@ -1,6 +1,6 @@
 package io.zkarampa.funcounter.web.controller;
 
-import io.zkarampa.funcounter.Game;
+import io.zkarampa.funcounter.game.quiz.Game;
 import io.zkarampa.funcounter.Player;
 import io.zkarampa.funcounter.service.GameService;
 import lombok.extern.slf4j.Slf4j;
@@ -20,15 +20,11 @@ public class GameController {
     @Autowired
     private GameService gameService;
 
-
     @GetMapping("/admin")
     public String index(Model model, HttpSession session) {
-        String gameId = (String) session.getAttribute("GAME_ID");
-
+        Integer gameId = (Integer) session.getAttribute("GAME_ID");
         log.info("Admin - GameId: {}", gameId);
-
-        model.addAttribute("gameId", String.format("http://localhost:8080/game/join?gameId=%s", gameId));
-
+        model.addAttribute("gameId", gameId);
         return "admin";
     }
 
@@ -45,14 +41,10 @@ public class GameController {
             @RequestParam("nAnswers") int nAnswers,
             HttpServletRequest request) {
         log.info("Create - Game Details: {}, {}", nQuestions, nAnswers);
-
-        String gameId = gameService.createGame(new Game(nQuestions,nAnswers));
+        Integer gameId = gameService.createGame(nQuestions, nAnswers);
         log.info("Create - Game created: {}", gameId);
-
         request.getSession().setAttribute("GAME_ID", gameId);
-
         return "redirect:/game/admin";
-
     }
 
     @PostMapping("/start")
@@ -61,15 +53,12 @@ public class GameController {
             @RequestParam("nAnswers") int nAnswers,
             HttpServletRequest request) {
         log.info("Info: {}, {}", nQuestions, nAnswers);
-
-
        return "redirect:/game/admin";
-
     }
 
 //================================================
     @GetMapping("/join")
-    public String join(@RequestParam(name="gameId", required=true) String gameId,Model model, HttpSession session) {
+    public String join(@RequestParam(name="gameId", required=true) Integer gameId, Model model, HttpSession session) {
         log.info("Join - GameId: {}", gameId);
 
         String playerName = (String) session.getAttribute("PLAYER_NAME");
@@ -98,20 +87,13 @@ public class GameController {
 
 
     @GetMapping("/play")
-    public String play(@RequestParam(name="gameId", required=true) String gameId, Model model, HttpSession session) {
+    public String play(@RequestParam(name="gameId", required=true) Integer gameId, Model model, HttpSession session) {
         log.info("Play - GameId: {}", gameId);
 
-        String info = gameService.getInfo(gameId);
         String playerName = (String) session.getAttribute("PLAYER_NAME");
-
         log.info("Play - PlayerName: {}", playerName);
 
-
-
-
-
-
-
+        String info = gameService.getInfo(gameId);
         model.addAttribute("info", info);
         return "game";
     }

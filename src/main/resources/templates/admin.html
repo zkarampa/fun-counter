@@ -33,10 +33,14 @@
     <!--</form>-->
 <!--</div>-->
 <div>
-    <h2>Game URL</h2>
-    <span th:text="${gameId}" /><br>
-<span th:text="${#request.requestURI}" /><br>
-<span th:text="${#request.requestURL}" />
+    <h2>Game PIN:</h2>
+    <h2 th:text="${gameId}" /><br>
+<!--<span th:text="${#request.requestURI}" /><br>-->
+<!--<span th:text="${#request.requestURL}" /><br>-->
+<!--<span th:text="${#httpServletRequest.requestURI}" /><br>-->
+<!--<span th:text="@{/game/join?gameId=__${gameId}__}" /><br>-->
+    <a th:href="@{/game/join?gameId=__${gameId}__}">Join</a>
+
 
 </div>
 
