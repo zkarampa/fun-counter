@@ -36,12 +36,9 @@ public class GameController {
     }
 
     @PostMapping("/create")
-    public String create(
-            @RequestParam("nQuestions") int nQuestions,
-            @RequestParam("nAnswers") int nAnswers,
-            HttpServletRequest request) {
-        log.info("Create - Game Details: {}, {}", nQuestions, nAnswers);
-        Integer gameId = gameService.createGame(nQuestions, nAnswers);
+    public String create(@RequestParam("rawQuiz") String rawQuiz, HttpServletRequest request) {
+        log.info("Create - Game Details: {}", rawQuiz);
+        Integer gameId = gameService.createGame(5, 5);
         log.info("Create - Game created: {}", gameId);
         request.getSession().setAttribute("GAME_ID", gameId);
         return "redirect:/game/admin";
@@ -53,16 +50,16 @@ public class GameController {
             @RequestParam("nAnswers") int nAnswers,
             HttpServletRequest request) {
         log.info("Info: {}, {}", nQuestions, nAnswers);
-       return "redirect:/game/admin";
+        return "redirect:/game/admin";
     }
 
-//================================================
+    //================================================
     @GetMapping("/join")
-    public String join(@RequestParam(name="gameId", required=true) Integer gameId, Model model, HttpSession session) {
+    public String join(@RequestParam(name = "gameId", required = true) Integer gameId, Model model, HttpSession session) {
         log.info("Join - GameId: {}", gameId);
 
         String playerName = (String) session.getAttribute("PLAYER_NAME");
-        if (playerName == null){
+        if (playerName == null) {
             model.addAttribute("redirectUrl", String.format("redirect:/game/join?gameId=%s", gameId));
             return "register";
         }
@@ -74,8 +71,8 @@ public class GameController {
     }
 
     @PostMapping("/register")
-    public String register(@RequestParam(name="name", required=true) String name,
-            @RequestParam(name="redirectUrl", required=true) String redirectUrl,
+    public String register(@RequestParam(name = "name", required = true) String name,
+                           @RequestParam(name = "redirectUrl", required = true) String redirectUrl,
                            Model model,
                            HttpSession session) {
         log.info("Register - Name: {}, RedirectUrl: {}", name, redirectUrl);
@@ -87,7 +84,7 @@ public class GameController {
 
 
     @GetMapping("/play")
-    public String play(@RequestParam(name="gameId", required=true) Integer gameId, Model model, HttpSession session) {
+    public String play(@RequestParam(name = "gameId", required = true) Integer gameId, Model model, HttpSession session) {
         log.info("Play - GameId: {}", gameId);
 
         String playerName = (String) session.getAttribute("PLAYER_NAME");

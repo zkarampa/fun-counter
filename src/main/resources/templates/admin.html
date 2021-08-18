@@ -13,10 +13,12 @@
 
 
     <form th:action="@{/game/create}" method="post">
-        <label for="nQuestions">Number of questions:</label><br>
-        <input type="number" id="nQuestions" name="nQuestions"><br>
-        <label for="nAnswers">Number of answers per question:</label><br>
-        <input type="number" id="nAnswers" name="nAnswers"><br><br>
+        <label>
+            <textarea name="rawQuiz" cols="40" rows="10"></textarea>
+        </label><br>
+
+<!--        <label for="rawQuiz">Raw Quiz in JSON</label><br>-->
+<!--        <input type="text" id="rawQuiz" name="rawQuiz"><br>-->
         <input type="submit" value="Create Game">
     </form>
 
@@ -25,6 +27,9 @@
     <input type="submit" value="Stop Current Game" />
     </form>
     </div>
+
+    <br>
+    <br>
 
 </div>
 <!--<div>-->
