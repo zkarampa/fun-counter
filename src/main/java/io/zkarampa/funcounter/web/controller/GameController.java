@@ -1,5 +1,6 @@
 package io.zkarampa.funcounter.web.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.zkarampa.funcounter.game.quiz.Game;
 import io.zkarampa.funcounter.Player;
 import io.zkarampa.funcounter.service.GameService;
@@ -36,22 +37,22 @@ public class GameController {
     }
 
     @PostMapping("/create")
-    public String create(@RequestParam("rawQuiz") String rawQuiz, HttpServletRequest request) {
+    public String create(@RequestParam("rawQuiz") String rawQuiz, HttpServletRequest request) throws JsonProcessingException {
         log.info("Create - Game Details: {}", rawQuiz);
-        Integer gameId = gameService.createGame(5, 5);
+        Integer gameId = gameService.createGame(rawQuiz);
         log.info("Create - Game created: {}", gameId);
         request.getSession().setAttribute("GAME_ID", gameId);
         return "redirect:/game/admin";
     }
 
-    @PostMapping("/start")
-    public String start(
-            @RequestParam("nQuestions") int nQuestions,
-            @RequestParam("nAnswers") int nAnswers,
-            HttpServletRequest request) {
-        log.info("Info: {}, {}", nQuestions, nAnswers);
-        return "redirect:/game/admin";
-    }
+//    @PostMapping("/start")
+//    public String start(
+//            @RequestParam("nQuestions") int nQuestions,
+//            @RequestParam("nAnswers") int nAnswers,
+//            HttpServletRequest request) {
+//        log.info("Info: {}, {}", nQuestions, nAnswers);
+//        return "redirect:/game/admin";
+//    }
 
     //================================================
     @GetMapping("/join")
